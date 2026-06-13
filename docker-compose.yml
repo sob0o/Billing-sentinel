@@ -62,17 +62,19 @@ services:
         -Dfs.s3a.path.style.access=true
 
   spark-master:
-    image: apache/spark:3.5.1
-    container_name: spark-master
-    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
-    environment:
-      - SPARK_NO_DAEMONIZE=true
-    ports:
-      - "8080:8080"
-    depends_on:
-      - hive-metastore
-      - minio
-      - kafka
+      image: apache/spark:3.5.1
+      container_name: spark-master
+      command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+      environment:
+        - SPARK_NO_DAEMONIZE=true
+      ports:
+        - "8080:8080"
+      volumes:
+        - ./spark-jobs/target:/opt/spark-jobs
+      depends_on:
+        - hive-metastore
+        - minio
+        - kafka
 
   spark-worker:
     image: apache/spark:3.5.1
@@ -82,6 +84,8 @@ services:
       - SPARK_NO_DAEMONIZE=true
       - SPARK_WORKER_MEMORY=2g
       - SPARK_WORKER_CORES=2
+    volumes:
+      - ./spark-jobs/target:/opt/spark-jobs
     depends_on:
       - spark-master
 
