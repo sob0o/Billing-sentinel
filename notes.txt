@@ -10,4 +10,4 @@ docker exec spark-master /opt/spark/bin/spark-submit `
 
 
   docker exec -u root spark-master mkdir -p /home/spark/.ivy2/cache
->> docker exec -u root spark-master chmod -R 777 /home/spark/.ivy2
+docker exec -u root spark-master chmod -R 777 /home/spark/.ivy2

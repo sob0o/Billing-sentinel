@@ -22,6 +22,7 @@ object StreamingJob {
       .option("kafka.bootstrap.servers", "kafka:29092")
       .option("subscribe", "invoices")
       .option("startingOffsets", "latest")
+      .option("failOnDataLoss", "false")   
       .load()
 
     println("Reading from Kafka topic: invoices")
