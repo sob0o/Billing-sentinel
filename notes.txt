@@ -1,0 +1,13 @@
+docker exec spark-master /opt/spark/bin/spark-submit `
+  --master spark://spark-master:7077 `
+  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 `
+  --conf spark.hadoop.fs.s3a.endpoint=http://minio:9000 `
+  --conf spark.hadoop.fs.s3a.access.key=minioadmin `
+  --conf spark.hadoop.fs.s3a.secret.key=minioadmin `
+  --conf spark.hadoop.fs.s3a.path.style.access=true `
+  /opt/spark-jobs/billing-sentinel-assembly.jar
+
+
+
+  docker exec -u root spark-master mkdir -p /home/spark/.ivy2/cache
+>> docker exec -u root spark-master chmod -R 777 /home/spark/.ivy2
