@@ -1,0 +1,20 @@
+# Docker
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Spark
+*.jar
+target/
+
+# Data files
+data/*.csv
+data/*.parquet
+data/*.json
+
+# IDE
+.idea/
+.vscode/
